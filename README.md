@@ -8,8 +8,8 @@ DataGuard memiliki sebuah standar yang berperan penting dalam meningkatkan inter
 
 ## Main Components
 
-- **DataGuard Contract**: Sebuah standar yang digunakan dalam pembuatan contract. [Baca selengkapnya.](data-guard-contract/README.md)
-- **DataGuard Repository**: Sebuah repository yang memuat kumpulan DataGuard Contract dan dapat diakses melalui API. [Baca selengkapnya.](data-guard-repository/README.md)
+- **DataGuard Contract**: Sebuah standar yang digunakan dalam pembuatan contract. [Baca selengkapnya.](dataguard-contract/README.md)
+- **DataGuard Repository**: Sebuah repository yang memuat kumpulan DataGuard Contract dan dapat diakses melalui API. [Soon.](#)
 
 ## How to Contribute
 

@@ -123,5 +123,6 @@ Pastikan untuk selalu berkomunikasi melalui forum atau platform yang ditentukan 
 | Name                                                | Roles     |
 | --------------------------------------------------- | --------- |
 | [Hani Perkasa](https://www.linkedin.com/in/haninp/) | Data Architect |
+| [Ardhi Wahyudhi](https://www.linkedin.com/in/ardhi-wahyudhi/) | Data Engineer |
 
 ## FAQ
