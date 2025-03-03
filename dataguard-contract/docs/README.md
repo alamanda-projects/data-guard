@@ -8,16 +8,16 @@ Dokumen ini akan menjelaskan beberapa hal penting terkait pembuatan DataGuard Co
 
 - [Executive Summary](./readme.md#executive-summary)
 - [Table of Content](./readme.md#table-of-content)
-- [DataGuard Contract YAML Demographics](./readme.md#data-contract-yaml-demographics)
+- [DataGuard Contract YAML Demographics](./readme.md#dataguard-contract-yaml-demographics)
   - [General Section](./readme.md#general-section)
   - [Metadata Section](./readme.md#metadata-section)
-    - [Sample Metadata Section](./readme.md#contoh-metadata-section)
+    - [Contoh Metadata Section](./readme.md#contoh-metadata-section)
   - [Model Section](./readme.md#model-section)
-    - [Sample Model Section](./readme.md#contoh-model-section)
+    - [Contoh Model Section](./readme.md#contoh-model-section)
   - [Ports Section](./readme.md#ports-section)
-    - [Sample Ports Section](./readme.md#contoh-ports-section)
+    - [Contoh Ports Section](./readme.md#contoh-ports-section)
   - [Examples Section](./readme.md#examples-section)
-    - [Sample Examples Section](./readme.md#contoh-examples-section)
+    - [Contoh Examples Section](./readme.md#contoh-examples-section)
 
 ## DataGuard Contract YAML Demographics
 

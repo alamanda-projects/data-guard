@@ -9,20 +9,19 @@ DataGuard Contract memiliki peran krusial dalam meningkatkan interoperabilitas, 
 - [Executive Summary](README.md#executive-summary)
 - [Table of Content](README.md#table-of-content)
 - [Discover the standard](README.md#discover-the-standard)
-- [What is DataGuard Contract?](README.md#what-is-data-contract)
-  - [DataGuard Contract Demograhics](README.md#data-contract-demograhics)
+- [What is DataGuard Contract?](README.md#what-is-dataguard-contract)
+  - [DataGuard Contract Demograhics](README.md#dataguard-contract-demograhics)
   - [Benefits](README.md#benefits)
   - [Risks](README.md#risks)
   - [Requirements & Implementation](README.md#requirements--implementation)
-  - [DataGuard Contract on Data Product](README.md#data-contract-on-data-product)
-- [Contributing to project](README.md#contributing-to-project)
-- [About This Project](README.md#about-this-project)
+  - [DataGuard Contract on Data Product](README.md#dataguard-contract-on-data-product)
+- [Contributing to project](../CONTRIBUTING.md)
 - [Changelog](../CHANGELOG.md)
-- [References](README.md#references)
+- [References](../README.md#references)
 
 ## Discover the standard
 
-Lebih lanjut tentang standar ini dapat ditemukan pada halaman [DataGuard Contract](docs/standard.md) dan untuk melihat contohnya dapat ditemukan pada halaman [DataGuard Contract Example](examples/examples.md). 
+Lebih lanjut tentang standar ini dapat ditemukan pada halaman [DataGuard Contract](docs/README.md) dan untuk melihat contohnya dapat ditemukan pada halaman [DataGuard Contract Example](examples/README.md). 
 
 ## What is DataGuard Contract?
 
