@@ -6,18 +6,18 @@ Dokumen ini akan menjelaskan beberapa hal penting terkait pembuatan DataGuard Co
 
 ## Table of Content
 
-- [Executive Summary](./readme.md#executive-summary)
-- [Table of Content](./readme.md#table-of-content)
-- [DataGuard Contract YAML Demographics](./readme.md#dataguard-contract-yaml-demographics)
-  - [General Section](./readme.md#general-section)
-  - [Metadata Section](./readme.md#metadata-section)
-    - [Contoh Metadata Section](./readme.md#contoh-metadata-section)
-  - [Model Section](./readme.md#model-section)
-    - [Contoh Model Section](./readme.md#contoh-model-section)
-  - [Ports Section](./readme.md#ports-section)
-    - [Contoh Ports Section](./readme.md#contoh-ports-section)
-  - [Examples Section](./readme.md#examples-section)
-    - [Contoh Examples Section](./readme.md#contoh-examples-section)
+- [Executive Summary](./README.md#executive-summary)
+- [Table of Content](./README.md#table-of-content)
+- [DataGuard Contract YAML Demographics](./README.md#dataguard-contract-yaml-demographics)
+  - [General Section](./README.md#general-section)
+  - [Metadata Section](./README.md#metadata-section)
+    - [Contoh Metadata Section](./README.md#contoh-metadata-section)
+  - [Model Section](./README.md#model-section)
+    - [Contoh Model Section](./README.md#contoh-model-section)
+  - [Ports Section](./README.md#ports-section)
+    - [Contoh Ports Section](./README.md#contoh-ports-section)
+  - [Examples Section](./README.md#examples-section)
+    - [Contoh Examples Section](./README.md#contoh-examples-section)
 
 ## DataGuard Contract YAML Demographics
 
