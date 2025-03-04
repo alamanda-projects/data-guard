@@ -4,11 +4,11 @@
 DataGuard merupakan sebuah platform yang digunakan untuk melakukan pencatatan metadata serta aturan-aturan terkait kualitas data.
 DataGuard dibangun dengan konsep Data Contract dan telah dimodifikasi untuk meningkatkan kemudahan dalam penggunaannya.
 
-DataGuard memiliki sebuah standar yang berperan penting dalam meningkatkan interoperabilitas, kualitas data, keamanan, efisiensi, dan integritas data. Sebagai alat yang mendefinisikan struktur dan format data, DataGuard Contract menjadi landasan yang memastikan interpretasi yang benar, konsistensi, dan pengelolaan data yang terstruktur.
+DataGuard memiliki sebuah standar yang berperan penting dalam interoperabilitas, kualitas data, keamanan, efisiensi dan integritas data. Sebagai alat yang mendefinisikan struktur dan format data, DataGuard diharapkan menjadi landasan untuk memastikan interpretasi yang benar, konsistensi dan pengelolaan data yang terstruktur.
 
 ## Main Components
 
-- **DataGuard Contract**: Sebuah standar yang digunakan dalam pembuatan contract. [Baca selengkapnya.](dataguard-contract/README.md)
+- **DataGuard Contract**: Sebuah standar yang digunakan dalam pembuatan data contract. [Baca selengkapnya.](dataguard-contract/README.md)
 - **DataGuard Repository**: Sebuah repository yang memuat kumpulan DataGuard Contract dan dapat diakses melalui API. [Soon.](#)
 
 ## How to Contribute
