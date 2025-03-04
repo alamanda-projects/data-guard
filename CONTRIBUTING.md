@@ -61,7 +61,7 @@ Dengan berkontribusi pada proyek DataGuard, Anda setuju untuk mematuhi Code of C
 
 ### 1. Understanding the Project
 
-Sebelum Anda berkontribusi, penting untuk memahami tujuan dan ruang lingkup proyek DataGuard. Bacalah [Executive Summary](README.md#executive-summary) dan [Discover the standard](docs/readme.md) untuk memahami secara keseluruhan.
+Sebelum Anda berkontribusi, penting untuk memahami tujuan dan ruang lingkup proyek DataGuard. Bacalah [Executive Summary](README.md#executive-summary) dan [Discover the standard](data-guard-standard/docs/readme.md) untuk memahami secara keseluruhan.
 
 ### 2. Read the Contribution Guidelines
 
@@ -123,5 +123,6 @@ Pastikan untuk selalu berkomunikasi melalui forum atau platform yang ditentukan 
 | Name                                                | Roles     |
 | --------------------------------------------------- | --------- |
 | [Hani Perkasa](https://www.linkedin.com/in/haninp/) | Data Architect |
+| [Ardhi Wahyudhi](https://www.linkedin.com/in/ardhi-wahyudhi/) | Data Engineer |
 
 ## FAQ
