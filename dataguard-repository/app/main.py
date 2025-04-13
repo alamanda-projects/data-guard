@@ -136,25 +136,20 @@ async def login_with_sakey(credentials: dict = Body(...)):
     if not Hasher.verify_password(private_key, sa_user["private_key"]):
         raise HTTPException(status_code=401, detail="Invalid private_key")
 
-    access_token = create_jwt_token(
-        {
+    expire_at = datetime.utcnow() + timedelta(days=sa_exp)
+    response = JSONResponse(
+        content={
+            "message": "Login successful (SAKey)",
             "client_id": sa_user["client_id"],
-            "cln": sa_user["client_id"],
-            "lvl": sa_user["group_access"],
-            "sts": sa_user["is_active"],
-            "tim": sa_user["data_domain"],
-            "typ": sa_user["type"],
-        },
-        sa_exp,
+            "expire_at": expire_at.isoformat() + "Z"
+        }
     )
-
-    return {"access_token": access_token, "token_type": "bearer"}
+    return response
 
 @app.post("/logout")
-async def logout_user(current_user: dict = Depends(token_verification)):
+async def logout_user():
     response = JSONResponse(content={"message": "Logout successful"})
-    # response = raise HTTPException(status_code=412, detail=usr_412_uname)
-    response.delete_cookie("Authorization")
+    response.delete_cookie("access_token", path="/")
     return response
 
 
