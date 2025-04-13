@@ -313,6 +313,34 @@ async def create_sakey(current_user: dict = Depends(token_verification)):
         "generated_at": current_dateTime,
     }
 
+@app.get("/sakey/lists", tags=["user"])
+async def list_sakeys(current_user: dict = Depends(token_verification)):
+    if current_user.get("typ") != "user":
+        raise HTTPException(status_code=403, detail="Only user can access this endpoint")
+
+    user_uname = current_user.get("usr")
+    user_level = current_user.get("lvl")
+    user_status = current_user.get("sts")
+
+    await access_verification(user_level, user_status, grplvlall)
+
+    # Jika user adalah root, tampilkan semua SAKey
+    if user_level in grplvlroot:
+        sakey_cursor = usrcollection.find({"type": "sa"})
+    else:
+        # Jika bukan root, hanya tampilkan SAKey yang dibuat oleh user sendiri
+        sakey_cursor = usrcollection.find({"type": "sa", "generated_by": user_uname})
+
+    sakey_list = []
+    async for sakey in sakey_cursor:
+        sakey_list.append({
+            "client_id": sakey.get("client_id"),
+            "generated_at": sakey.get("generated_at"),
+            "is_active": current_user.get("sts"),
+            "expire_at": sakey.get("expire_at")
+        })
+
+    return {"sakeys": sakey_list}
 
 # Example route to get user data
 @app.get("/user/me", response_model=dict, tags=["user"])
