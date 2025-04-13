@@ -15,6 +15,7 @@ from app.core.hasher import Hasher
 from app.core.generator import (
     cn_generator,
     create_jwt_token,
+    create_jwt_token_sakey,
     create_private_key,
     tkn_exp,
     sa_exp,
@@ -136,6 +137,18 @@ async def login_with_sakey(credentials: dict = Body(...)):
     if not Hasher.verify_password(private_key, sa_user["private_key"]):
         raise HTTPException(status_code=401, detail="Invalid private_key")
 
+    access_token = create_jwt_token_sakey(
+        {
+            "client_id": sa_user["client_id"],
+            "cln": sa_user["client_id"],
+            "lvl": sa_user["group_access"],
+            "sts": sa_user["is_active"],
+            "tim": sa_user["data_domain"],
+            "typ": sa_user["type"],
+        },
+        sa_exp * 24 * 60  # convert days to minutes
+    )
+
     expire_at = datetime.utcnow() + timedelta(days=sa_exp)
     response = JSONResponse(
         content={
@@ -143,6 +156,13 @@ async def login_with_sakey(credentials: dict = Body(...)):
             "client_id": sa_user["client_id"],
             "expire_at": expire_at.isoformat() + "Z"
         }
+    )
+    response.set_cookie(
+        key="access_token",
+        value=f"Bearer {access_token}",
+        httponly=True,
+        secure=True,
+        samesite="Strict"
     )
     return response
 
@@ -241,6 +261,9 @@ async def create_user(
 
 @app.get("/sakey/create", tags=["user"])
 async def create_sakey(current_user: dict = Depends(token_verification)):
+    if current_user.get("typ") != "user":
+        raise HTTPException(status_code=403, detail="Only user can create user")
+
     # # checking access level
     user_uname = current_user["usr"]
     user_level = current_user["lvl"]
@@ -294,23 +317,31 @@ async def create_sakey(current_user: dict = Depends(token_verification)):
 # Example route to get user data
 @app.get("/user/me", response_model=dict, tags=["user"])
 async def who_am_i(current_user: dict = Depends(token_verification)):
-    user_uname = current_user["usr"]
-    user_level = current_user["lvl"]
-    user_status = current_user["sts"]
-    user_team = current_user["tim"]
-    await access_verification(user_level, user_status, grplvlall)
-    return current_user
+    if current_user.get("typ") != "user":
+        raise HTTPException(status_code=403, detail="This endpoint is only for User access")
+    
+    return {
+        "client_id": current_user.get("usr"),
+        "group_access": current_user.get("lvl"),
+        "data_domain": current_user.get("tim"),
+        "is_active": current_user.get("sts"),
+        "type": current_user.get("typ")
+    }
 
 
 # Example route to get user data
 @app.get("/sakey/me", response_model=dict, tags=["user"])
-async def who_am_i(current_user: dict = Depends(token_verification)):
-    user_uname = current_user["usr"]
-    user_level = current_user["lvl"]
-    user_status = current_user["sts"]
-    user_team = current_user["tim"]
-    await access_verification(user_level, user_status, grplvlall)
-    return current_user
+async def sakey_info(current_user: dict = Depends(token_verification)):
+    if current_user.get("typ") != "sa":
+        raise HTTPException(status_code=403, detail="This endpoint is only for SAKey access")
+
+    return {
+        "client_id": current_user.get("client_id") or current_user.get("cln"),
+        "group_access": current_user.get("lvl"),
+        "data_domain": current_user.get("tim"),
+        "is_active": current_user.get("sts"),
+        "type": current_user.get("typ")
+    }
 
 
 # # # ======================= Data Contract
