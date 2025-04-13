@@ -53,6 +53,12 @@ def create_jwt_token(data: dict, expires_delta: int):
     encoded_jwt = jwt.encode(to_encode, tkn_secret, algorithm=tkn_alg)
     return encoded_jwt
 
+# def create_jwt_token_sakey(data: dict, expires_delta: int):
+#     to_encode = data.copy()
+#     expire = datetime.utcnow() + timedelta(minutes=expires_delta)
+#     to_encode.update({"exp": expire, "iss": "DataGuard", "typ": "access"})
+#     encoded_jwt = jwt.encode(to_encode, sa_secret, algorithm=sa_alg)
+#     return encoded_jwt
 
 # # # ======================= Service Account Key (SA-Key)
 # # # ======================= Bagian ini untuk kebutuhan manajemen SA-Key

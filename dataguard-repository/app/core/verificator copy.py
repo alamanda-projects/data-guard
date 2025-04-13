@@ -1,4 +1,11 @@
-from fastapi import HTTPException, Header, Depends, Request
+# # # =======================
+# # # Project : DataGuard Repository
+# # # Author  : Alamanda Team
+# # # File    : app/core/verificator.py
+# # # Function: Verificator
+# # # =======================
+
+from fastapi import HTTPException, Header, Depends
 from fastapi.security import OAuth2PasswordBearer
 import jwt
 from app.core.connection import database, col_dgr, col_usr
@@ -133,25 +140,17 @@ tkn_secret = tkn_key + tkn_tkn
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="")
 
 
-async def token_verification(request: Request):
-    token = request.cookies.get("access_token")
-    if not token:
-        raise HTTPException(
-            status_code=401,
-            detail="Token missing",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
-    token = token.replace("Bearer ", "")
-    
+async def token_verification(token: str = Depends(oauth2_scheme)):
+    # # Verify SAKey
     try:
         payload = jwt.decode(token, sa_secret, algorithms=[sa_alg])
         return payload
-    except jwt.PyJWTError:
+    except:
+        # # Verify SAKey
         try:
             payload = jwt.decode(token, tkn_secret, algorithms=[tkn_alg])
             return payload
-        except jwt.PyJWTError:
+        except:
             raise HTTPException(
                 status_code=401,
                 detail=usr_401_cnvc,

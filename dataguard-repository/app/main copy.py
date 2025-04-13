@@ -5,7 +5,7 @@
 # # # Function: Main script
 # # # =======================
 
-from fastapi import FastAPI, HTTPException, Depends, Request, Body
+from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import JSONResponse, RedirectResponse, HTMLResponse
 from typing import Dict
 from app.model.users import UserCreate
@@ -84,71 +84,29 @@ async def welcome():
 
 # Generate Token
 @app.post("/login")
-async def login_for_access_token(credentials: dict = Body(...)):
-    db_user = await usrcollection.find_one({"username": credentials["username"]})
-    if not db_user:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
+async def login_for_access_token(
+    user_in_db: Dict[str, str] = Depends(user_verification)
+):
+    # # checking access level
+    user_uname = user_in_db["username"]
+    user_level = user_in_db["level"]
+    user_status = user_in_db["is_active"]
+    user_team = user_in_db["data_domain"]
+    user_type = user_in_db["type"]
+    await access_verification(user_level, user_status, grplvlall)
+    # # checking access level
 
-    if not Hasher.verify_password(credentials["password"], db_user["password"]):
-        raise HTTPException(status_code=401, detail="Incorrect username or password")
+    user_data = {
+        "usr": user_uname,
+        "typ": user_type,
+        "lvl": user_level,
+        "sts": user_status,
+        "tim": user_team,
+    }
 
-    access_token_expires = tkn_exp
-    access_token = create_jwt_token(
-        {
-            "usr": db_user["username"],
-            "lvl": db_user["group_access"],
-            "sts": db_user["is_active"],
-            "tim": db_user["data_domain"],
-            "typ": db_user["type"],
-        },
-        access_token_expires,
-    )
+    token = create_jwt_token(user_data, tkn_exp)
+    return {"access_token": token, "token_type": "Bearer"}
 
-    response = JSONResponse(
-        content={
-            "message": "Login successful",
-            "user_id": str(db_user.get("username")),
-            "name": db_user.get("name"),
-        }
-    )
-    response.set_cookie(
-        key="access_token",
-        value=f"Bearer {access_token}",
-        httponly=True,
-        secure=True,
-        samesite="Strict"
-    )
-    return response
-
-
-@app.post("/login/midware", tags=["user"])
-async def login_with_sakey(credentials: dict = Body(...)):
-    client_id = credentials.get("client_id")
-    private_key = credentials.get("private_key")
-
-    if not client_id or not private_key:
-        raise HTTPException(status_code=400, detail="client_id and private_key are required")
-
-    sa_user = await usrcollection.find_one({"client_id": client_id, "type": "sa", "is_active": True})
-    if not sa_user:
-        raise HTTPException(status_code=401, detail="Invalid client_id")
-
-    if not Hasher.verify_password(private_key, sa_user["private_key"]):
-        raise HTTPException(status_code=401, detail="Invalid private_key")
-
-    access_token = create_jwt_token(
-        {
-            "client_id": sa_user["client_id"],
-            "cln": sa_user["client_id"],
-            "lvl": sa_user["group_access"],
-            "sts": sa_user["is_active"],
-            "tim": sa_user["data_domain"],
-            "typ": sa_user["type"],
-        },
-        sa_exp,
-    )
-
-    return {"access_token": access_token, "token_type": "bearer"}
 
 @app.post("/logout")
 async def logout_user(current_user: dict = Depends(token_verification)):
