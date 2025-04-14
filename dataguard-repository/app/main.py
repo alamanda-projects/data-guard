@@ -74,7 +74,7 @@ async def default_page():
 
 @app.get("/welcome")
 async def welcome():
-    with open('app/welcome_page.html', 'r') as f:
+    with open("app/welcome_page.html", "r") as f:
         content = f.read()
 
         content = content.replace("{APP_TITLE}", app_title)
@@ -91,10 +91,10 @@ async def welcome():
 async def login_for_access_token(credentials: dict = Body(...)):
     db_user = await usrcollection.find_one({"username": credentials["username"]})
     if not db_user:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
+        raise HTTPException(status_code=400, detail=random.choice(usrnotallowed))
 
     if not Hasher.verify_password(credentials["password"], db_user["password"]):
-        raise HTTPException(status_code=401, detail="Incorrect username or password")
+        raise HTTPException(status_code=401, detail=random.choice(usrnotallowed))
 
     access_token_expires = tkn_exp
     access_token = create_jwt_token(
@@ -120,7 +120,7 @@ async def login_for_access_token(credentials: dict = Body(...)):
         value=f"Bearer {access_token}",
         httponly=True,
         secure=True,
-        samesite="Strict"
+        samesite="Strict",
     )
     return response
 
@@ -131,14 +131,16 @@ async def login_with_sakey(credentials: dict = Body(...)):
     private_key = credentials.get("private_key")
 
     if not client_id or not private_key:
-        raise HTTPException(status_code=400, detail="client_id and private_key are required")
+        raise HTTPException(status_code=400, detail=random.choice(usrnotallowed))
 
-    sa_user = await usrcollection.find_one({"client_id": client_id, "type": "sa", "is_active": True})
+    sa_user = await usrcollection.find_one(
+        {"client_id": client_id, "type": "sa", "is_active": True}
+    )
     if not sa_user:
-        raise HTTPException(status_code=401, detail="Invalid client_id")
+        raise HTTPException(status_code=401, detail=random.choice(usrnotallowed))
 
     if not Hasher.verify_password(private_key, sa_user["private_key"]):
-        raise HTTPException(status_code=401, detail="Invalid private_key")
+        raise HTTPException(status_code=401, detail=random.choice(usrnotallowed))
 
     access_token = create_jwt_token_sakey(
         {
@@ -149,7 +151,7 @@ async def login_with_sakey(credentials: dict = Body(...)):
             "tim": sa_user["data_domain"],
             "typ": sa_user["type"],
         },
-        sa_exp * 24 * 60  # convert days to minutes
+        sa_exp * 24 * 60,  # convert days to minutes
     )
 
     expire_at = datetime.utcnow() + timedelta(days=sa_exp)
@@ -157,7 +159,7 @@ async def login_with_sakey(credentials: dict = Body(...)):
         content={
             "message": "Login successful (SAKey)",
             "client_id": sa_user["client_id"],
-            "expire_at": expire_at.isoformat() + "Z"
+            "expire_at": expire_at.isoformat() + "Z",
         }
     )
     response.set_cookie(
@@ -165,9 +167,10 @@ async def login_with_sakey(credentials: dict = Body(...)):
         value=f"Bearer {access_token}",
         httponly=True,
         secure=True,
-        samesite="Strict"
+        samesite="Strict",
     )
     return response
+
 
 @app.post("/logout")
 async def logout_user():
@@ -316,6 +319,7 @@ async def create_sakey(current_user: dict = Depends(token_verification)):
         "generated_at": current_dateTime,
     }
 
+
 @app.get("/sakey/lists", tags=["user"])
 async def list_sakeys(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "user":
@@ -336,27 +340,30 @@ async def list_sakeys(current_user: dict = Depends(token_verification)):
 
     sakey_list = []
     async for sakey in sakey_cursor:
-        sakey_list.append({
-            "client_id": sakey.get("client_id"),
-            "generated_at": sakey.get("generated_at"),
-            "is_active": current_user.get("sts"),
-            "expire_at": sakey.get("expire_at")
-        })
+        sakey_list.append(
+            {
+                "client_id": sakey.get("client_id"),
+                "generated_at": sakey.get("generated_at"),
+                "is_active": current_user.get("sts"),
+                "expire_at": sakey.get("expire_at"),
+            }
+        )
 
     return {"sakeys": sakey_list}
+
 
 # Example route to get user data
 @app.get("/user/me", response_model=dict, tags=["user"])
 async def who_am_i(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "user":
         raise HTTPException(status_code=403, detail=random.choice(botnotallowed))
-    
+
     return {
         "client_id": current_user.get("usr"),
         "group_access": current_user.get("lvl"),
         "data_domain": current_user.get("tim"),
         "is_active": current_user.get("sts"),
-        "type": current_user.get("typ")
+        "type": current_user.get("typ"),
     }
 
 
@@ -371,7 +378,7 @@ async def sakey_info(current_user: dict = Depends(token_verification)):
         "group_access": current_user.get("lvl"),
         "data_domain": current_user.get("tim"),
         "is_active": current_user.get("sts"),
-        "type": current_user.get("typ")
+        "type": current_user.get("typ"),
     }
 
 
