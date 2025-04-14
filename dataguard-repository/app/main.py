@@ -31,6 +31,7 @@ from app.core.verificator import (
     grplvlall,
 )
 from app.info.app_info import *
+import random
 
 current_dateTime = datetime.now()
 
@@ -39,10 +40,12 @@ usrcollection = database[col_usr]
 dccollection = database[col_dgr]
 
 # Error response
-usrnotallowed = usr_403
+usrnotallowed = [usr_403, usr_403_elders, usr_403_guardian]
 dcnotfound = dc_404
 dcnotvalid = dc_412  # # persiapan untuk validasi YAML / JSON
 dc_404_notfound = HTTPException(status_code=404, detail=dcnotfound)
+botnotallowed = [usr_403_optimus, usr_403_megatron, usr_403_grimlock]
+hmnnotallowed = [usr_403_optimus2, usr_403_megatron2, usr_403_grimlock2]
 
 app = FastAPI(
     title=app_title,
@@ -203,7 +206,7 @@ async def create_user(
     # Cek apakah user yang digunakan adalah root
     # karena hanya root yang boleh menambahkan user root lainya
     if user_level not in grplvlroot or user_status == False:
-        raise HTTPException(status_code=403, detail=usrnotallowed)
+        raise HTTPException(status_code=403, detail=random.choice(usrnotallowed))
 
     # Cek apakah sudah ada user root active
     # itupun dalam kondisi root yang ditambahkan harus mode is_active = False
@@ -262,7 +265,7 @@ async def create_user(
 @app.get("/sakey/create", tags=["user"])
 async def create_sakey(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "user":
-        raise HTTPException(status_code=403, detail="Only user can create user")
+        raise HTTPException(status_code=403, detail=random.choice(botnotallowed))
 
     # # checking access level
     user_uname = current_user["usr"]
@@ -273,7 +276,7 @@ async def create_sakey(current_user: dict = Depends(token_verification)):
     # # checking access level
 
     if user_level not in grplvlall or user_status == False:
-        raise HTTPException(status_code=403, detail=usrnotallowed)
+        raise HTTPException(status_code=403, detail=random.choice(usrnotallowed))
 
     clientid = cn_generator()
 
@@ -316,7 +319,7 @@ async def create_sakey(current_user: dict = Depends(token_verification)):
 @app.get("/sakey/lists", tags=["user"])
 async def list_sakeys(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "user":
-        raise HTTPException(status_code=403, detail="Only user can access this endpoint")
+        raise HTTPException(status_code=403, detail=random.choice(botnotallowed))
 
     user_uname = current_user.get("usr")
     user_level = current_user.get("lvl")
@@ -346,7 +349,7 @@ async def list_sakeys(current_user: dict = Depends(token_verification)):
 @app.get("/user/me", response_model=dict, tags=["user"])
 async def who_am_i(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "user":
-        raise HTTPException(status_code=403, detail="This endpoint is only for User access")
+        raise HTTPException(status_code=403, detail=random.choice(botnotallowed))
     
     return {
         "client_id": current_user.get("usr"),
@@ -361,7 +364,7 @@ async def who_am_i(current_user: dict = Depends(token_verification)):
 @app.get("/sakey/me", response_model=dict, tags=["user"])
 async def sakey_info(current_user: dict = Depends(token_verification)):
     if current_user.get("typ") != "sa":
-        raise HTTPException(status_code=403, detail="This endpoint is only for SAKey access")
+        raise HTTPException(status_code=403, detail=random.choice(hmnnotallowed))
 
     return {
         "client_id": current_user.get("client_id") or current_user.get("cln"),
