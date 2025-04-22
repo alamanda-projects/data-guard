@@ -1,8 +1,8 @@
 {
 	"info": {
 		"_postman_id": "0378804b-21fc-486c-b500-7901734326c7",
-		"name": "Data API DCR 2.0",
-		"description": "## Version 0.1.0 (Alpha)\n\nFitur : \n- Manajemen User\n- Manajemen Data Contract\n\nPengembang : Tim Data dari DTO Kemenkes RI\n\nLisensi : [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0.html)",
+		"name": "DataGuard Repository",
+		"description": "## Version 0.1.0 (Alpha)\n\nFitur :\n\n- Manajemen User\n    \n- Manajemen Data Contract\n    \n\nPengembang : Alamanda Projects\n\nLisensi : [GNU AFFERO GENERAL PUBLIC LICENSE](https://www.gnu.org/licenses/agpl-3.0.txt)",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "5679853"
 	},
@@ -395,6 +395,82 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "filter-dbtschema",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{TOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/datacontract/dbtschema/filter?contract_number=ssj61IIaYkHKD",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"datacontract",
+										"dbtschema",
+										"filter"
+									],
+									"query": [
+										{
+											"key": "contract_number",
+											"value": "H25DR1OPXKJPp",
+											"disabled": true
+										},
+										{
+											"key": "contract_number",
+											"value": "ssj61IIaYkHKD",
+											"description": "ssm"
+										},
+										{
+											"key": "contract_number",
+											"value": "ngasal",
+											"description": "asik,ssm",
+											"disabled": true
+										},
+										{
+											"key": "contract_number",
+											"value": "yCmT8BoiLv5Z0",
+											"description": "not found",
+											"disabled": true
+										},
+										{
+											"key": "contract_number",
+											"value": "3oxinjpVbBefh",
+											"description": "asik",
+											"disabled": true
+										},
+										{
+											"key": "contract_number",
+											"value": "1xuU2ezUCvR4a",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -718,7 +794,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "// {\n//   \"username\": \"admin24\",\n//   \"password\": \"admiN!23\",\n//   \"name\": \"Admin Satu\",\n//   \"group_access\": \"admin\",\n//     \"data_domain\": \"admin\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"roots24\",\n//   \"password\": \"DCr00t!!\",\n//   \"name\": \"Iam Root\",\n//   \"group_access\": \"root\",\n//   \"data_domain\": \"root\",\n//   \"is_active\": false\n// }\n\n// {\n//   \"username\": \"mwuser\",\n//   \"password\": \"middleW4RE!!\",\n//   \"name\": \"SERVICE ACCOUNT\",\n//   \"group_access\": \"admin\",\n//   \"data_domain\": \"admin\",\n//   \"is_active\": true\n// }\n\n{\n  \"username\": \"admin3\",\n  \"password\": \"admiN!23\",\n  \"name\": \"Admin Tiga\",\n  \"group_access\": \"admin\",\n  \"data_domain\": \"admin\",\n  \"is_active\": true\n}\n\n// {\n//   \"username\": \"user2\",\n//   \"password\": \"useR!234\",\n//   \"name\": \"User SSM\",\n//   \"group_access\": \"user\",\n//    \"data_domain\": \"ssm\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"user\",\n//   \"password\": \"useR!234\",\n//   \"name\": \"User ASIK\",\n//   \"group_access\": \"user\",\n//    \"data_domain\": \"asik\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"developer2\",\n//   \"password\": \"developeR!23\",\n//   \"name\": \"Developer SSM\",\n//   \"group_access\": \"developer\",\n//     \"data_domain\": \"ssm\",\n//   \"is_active\": true\n// }",
+							"raw": "// {\n//   \"username\": \"admin24\",\n//   \"password\": \"admiN!23\",\n//   \"name\": \"Admin Satu\",\n//   \"group_access\": \"admin\",\n//     \"data_domain\": \"admin\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"roots24\",\n//   \"password\": \"DCr00t!!\",\n//   \"name\": \"Iam Root\",\n//   \"group_access\": \"root\",\n//   \"data_domain\": \"root\",\n//   \"is_active\": false\n// }\n\n// {\n//   \"username\": \"mwuser\",\n//   \"password\": \"middleW4RE!!\",\n//   \"name\": \"SERVICE ACCOUNT\",\n//   \"group_access\": \"admin\",\n//   \"data_domain\": \"admin\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"admin\",\n//   \"password\": \"admiN!23\",\n//   \"name\": \"Admin Satu\",\n//   \"group_access\": \"admin\",\n//   \"data_domain\": \"admin\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"user2\",\n//   \"password\": \"useR!234\",\n//   \"name\": \"User SSM\",\n//   \"group_access\": \"user\",\n//    \"data_domain\": \"ssm\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"user\",\n//   \"password\": \"useR!234\",\n//   \"name\": \"User ASIK\",\n//   \"group_access\": \"user\",\n//    \"data_domain\": \"asik\",\n//   \"is_active\": true\n// }\n\n// {\n//   \"username\": \"developer2\",\n//   \"password\": \"developeR!23\",\n//   \"name\": \"Developer SSM\",\n//   \"group_access\": \"developer\",\n//     \"data_domain\": \"ssm\",\n//   \"is_active\": true\n// }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -793,34 +869,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "sakey me",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{baseurl}}/sakey/me",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"sakey",
-								"me"
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -836,7 +884,8 @@
 								"exec": [
 									""
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
 							}
 						},
 						{
@@ -845,7 +894,59 @@
 								"exec": [
 									"pm.environment.set(\"TOKEN\", pm.response.json().access_token)"
 								],
-								"type": "text/javascript"
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\": \"root\", \"password\": \"DCr00t!!\"}\n// {\"username\": \"admin3\", \"password\": \"admiN!23\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login midware",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"TOKEN\", pm.response.json().access_token)"
+								],
+								"type": "text/javascript",
+								"packages": {}
 							}
 						}
 					],
@@ -858,54 +959,67 @@
 							{
 								"key": "username",
 								"value": "root",
-								"type": "text"
+								"disabled": true
 							},
 							{
 								"key": "password",
 								"value": "DCr00t!!",
-								"type": "text"
+								"disabled": true
 							},
 							{
 								"key": "username",
 								"value": "admin3",
-								"type": "text",
 								"disabled": true
 							},
 							{
 								"key": "password",
 								"value": "admiN!23",
-								"type": "text",
 								"disabled": true
 							},
 							{
 								"key": "username",
 								"value": "user2",
 								"description": "SSM",
-								"type": "text",
 								"disabled": true
 							},
 							{
 								"key": "password",
 								"value": "useR!234",
 								"description": "SSM",
-								"type": "text",
 								"disabled": true
 							},
 							{
 								"key": "username",
 								"value": "user",
 								"description": "ASIK",
-								"type": "text",
 								"disabled": true
 							},
 							{
 								"key": "password",
 								"value": "useR!234",
 								"description": "ASIK",
-								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "username",
+								"value": "dg_r00t",
+								"disabled": true
+							},
+							{
+								"key": "password",
+								"value": "$1-p4l1n9-D3w@",
 								"disabled": true
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"client_id\": \"root\", \"private_key\": \"private_key\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{baseurl}}/login",
 							"host": [
@@ -960,6 +1074,67 @@
 							],
 							"path": [
 								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "sakey",
+			"item": [
+				{
+					"name": "sakey me",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/sakey/me",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"sakey",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sakey list",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/sakey/lists",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"sakey",
+								"lists"
 							]
 						}
 					},
