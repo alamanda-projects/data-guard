@@ -965,7 +965,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"client_id\": \"d5DYiirusre6Bi\",\n    \"private_key\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbG4iOiI1RFlpaXJ1c3JlNkJpIiwidXNyIjoicm9vdCIsInR5cCI6InNhIiwibHZsIjoicm9vdCIsInN0cyI6dHJ1ZSwidGltIjoicm9vdCIsImV4cCI6MTc3NjA4MTgxNX0.sFkTqQoXA2kC4gZKLJbn50qSj5HXA6kEIZtGYG-dEyM\"\n}",
+							"raw": "{\n    \"client_id\": \"d5DYiirusre6Bi\",\n    \"private_key\": \"{--YOUR_PRIVATE_KEY--}\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
