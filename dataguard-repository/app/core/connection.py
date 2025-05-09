@@ -9,8 +9,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from decouple import config
 
 host = config("MONGODB_HOST", default="dgr-db")
-user = config("MONGODB_USER", default="root")
-password = config("MONGODB_PASS", default="example")
+user = config("MONGODB_USER", default="admin")
+password = config("MONGODB_PASS", default="yellow")
 port = config("MONGODB_PORT", default="27017")
 db = config("MONGODB_DB", default="dgrdb")
 col_dgr = config("MONGODB_COLLECTION_DGR", default="dgr")
