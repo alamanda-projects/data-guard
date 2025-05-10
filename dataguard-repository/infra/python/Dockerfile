@@ -1,5 +1,5 @@
 # ------- STAGE 1: Builder -------
-FROM python:3.12-alpine AS builder
+FROM python:3.13-alpine AS builder
 
 # Create virtual environment
 RUN python -m venv /opt/venv
@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 RUN pip install --no-cache-dir -r addpack.txt
 
 # ------- STAGE 2: Runtime -------
-FROM python:3.12-alpine AS runtime
+FROM python:3.13-alpine AS runtime
 
 # Set arguments
 ARG BASE_DIR=/work
