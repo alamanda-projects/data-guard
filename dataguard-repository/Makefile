@@ -6,12 +6,26 @@ docker_build_app_image:
 		-f infra/python/Dockerfile \
 		-t dgr-app-image:latest .
 
+docker_build_app_image_linux:
+	docker build \
+		-f infra/python/Dockerfile \
+		--platform linux/amd64 \
+		-t dgr-app-image:latest-linux .
+
 docker_build_db_image:
 	docker build \
 		-f infra/mongodb/Dockerfile \
 		--build-arg MONGODB_USER=$(MONGODB_USER) \
 		--build-arg MONGODB_PASS=$(MONGODB_PASS) \
 		-t dgr-db-image:latest .
+
+docker_build_db_image_linux:
+	docker build \
+		-f infra/mongodb/Dockerfile \
+		--build-arg MONGODB_USER=$(MONGODB_USER) \
+		--build-arg MONGODB_PASS=$(MONGODB_PASS) \
+		--platform linux/amd64 \
+		-t dgr-db-image:latest-linux .
 
 docker_compose_up:
 	docker compose up --build -d  
